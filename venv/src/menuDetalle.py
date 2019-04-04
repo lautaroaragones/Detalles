@@ -70,6 +70,7 @@ def menu_avoxi():
     avoxiDetalle.get_total_por_pais(sheet_tabla_avoxi,avoxiDetalle.get_lista_paises(sheet_tabla_avoxi))
     # Se obtiene el total del consumo
     print("El total es: " + str(avoxiDetalle.get_total(sheet_tabla_avoxi)))
+    os.remove('avoxi.xlsx')
 
 def menu_level3_peru():
     print("--- USTED ELEGIO LEVEL 3 - PERU ---")
