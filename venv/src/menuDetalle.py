@@ -141,6 +141,8 @@ def menu_level3_colombia():
     sheet_tabla_level3_colombia = excelDetalle.open_sheet_default(excel_level3_colombia)
 
     #Se obtiene la tabla por descripciones
-    #level3ColombiaDetalle.get_total_por_tipo(sheet_tabla_level3_brasil, level3BrasilDetalle.get_lista_tipo(sheet_tabla_level3_brasil))
+    level3ColombiaDetalle.get_total_por_descripcion(sheet_tabla_level3_colombia,level3ColombiaDetalle.get_lista_descripcion(sheet_tabla_level3_colombia))
     #Se obtiene el total del consumo
     print("El total es: " + str(level3ColombiaDetalle.get_total(sheet_tabla_level3_colombia)))
+
+
