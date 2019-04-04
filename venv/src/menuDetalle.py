@@ -19,6 +19,7 @@ def menu():
     print("\t2 - Level 3 - Peru")
     print("\t3 - Level 3 - Argentina")
     print("\t4 - Level 3 - Brasil")
+    print("\t5 - Level 3 - Colombia")
     print("\t9 - Salir")
 
 def option_menu():
@@ -44,6 +45,10 @@ def option_menu():
         elif opcionMenu == "4":
             print("")
             menu_level3_brasil()
+            input("")
+        elif opcionMenu == "5":
+            print("")
+            menu_level3_colombia()
             input("")
         elif opcionMenu == "9":
             break
@@ -123,3 +128,19 @@ def menu_level3_brasil():
     #Se obtiene el total del consumo
     print("El total es: " + str(level3BrasilDetalle.get_total(sheet_tabla_level3_brasil)))
 
+def menu_level3_colombia():
+    print("--- USTED ELEGIO LEVEL 3 - COLOMBIA ---")
+    print("EL ARCHIVO DEBE ESTAR EN FORMATO .XLSX\n")
+    getPath = input("Inserta el path (Debe incluir el nombre del archivo) >> ")
+    path = getPath.replace('"', '')
+
+
+    # Se obtiene el excel - Detalle Level 3 Peru
+    excel_level3_brasil = excelDetalle.open_excel(path)
+    # Se obtiene la sheet de la tabla - Level 3 Peru
+    sheet_tabla_level3_brasil = excelDetalle.open_sheet_default(excel_level3_brasil)
+
+    #Se obtiene la tabla por descripciones
+    level3BrasilDetalle.get_total_por_tipo(sheet_tabla_level3_brasil, level3BrasilDetalle.get_lista_tipo(sheet_tabla_level3_brasil))
+    #Se obtiene el total del consumo
+    print("El total es: " + str(level3BrasilDetalle.get_total(sheet_tabla_level3_brasil)))
