@@ -1,7 +1,7 @@
 import os
 import glob
 
-from detalle import avoxiDetalle , level3PeruDetalle, level3ArgentinaDetalle, level3BrasilDetalle
+from detalle import avoxiDetalle , level3PeruDetalle, level3ArgentinaDetalle, level3BrasilDetalle, level3ColombiaDetalle
 from excel import excelDetalle
 
 from pyexcel.cookbook import merge_all_to_a_book
@@ -136,11 +136,11 @@ def menu_level3_colombia():
 
 
     # Se obtiene el excel - Detalle Level 3 Peru
-    excel_level3_brasil = excelDetalle.open_excel(path)
+    excel_level3_colombia = excelDetalle.open_excel(path)
     # Se obtiene la sheet de la tabla - Level 3 Peru
-    sheet_tabla_level3_brasil = excelDetalle.open_sheet_default(excel_level3_brasil)
+    sheet_tabla_level3_colombia = excelDetalle.open_sheet_default(excel_level3_colombia)
 
     #Se obtiene la tabla por descripciones
-    level3BrasilDetalle.get_total_por_tipo(sheet_tabla_level3_brasil, level3BrasilDetalle.get_lista_tipo(sheet_tabla_level3_brasil))
+    #level3ColombiaDetalle.get_total_por_tipo(sheet_tabla_level3_brasil, level3BrasilDetalle.get_lista_tipo(sheet_tabla_level3_brasil))
     #Se obtiene el total del consumo
-    print("El total es: " + str(level3BrasilDetalle.get_total(sheet_tabla_level3_brasil)))
+    print("El total es: " + str(level3ColombiaDetalle.get_total(sheet_tabla_level3_colombia)))
