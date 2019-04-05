@@ -36,19 +36,35 @@ def option_menu():
             input()
         elif opcionMenu == "2":
             print("")
-            menu_level3_peru()
+            nombre = "PERU"
+            subtotal = level3PeruDetalle.get_total_por_descripcion
+            lista = level3PeruDetalle.get_lista_descripcion
+            total = level3PeruDetalle.get_total
+            menu_level3(nombre, subtotal, lista, total)
             input()
         elif opcionMenu == "3":
             print("")
-            menu_level3_argentina()
+            nombre = "ARGENTINA"
+            subtotal = level3ArgentinaDetalle.get_total_por_descripcion
+            lista = level3ArgentinaDetalle.get_lista_descripcion
+            total = level3ArgentinaDetalle.get_total
+            menu_level3(nombre, subtotal, lista, total)
             input("")
         elif opcionMenu == "4":
             print("")
-            menu_level3_brasil()
+            nombre = "BRASIL"
+            subtotal = level3BrasilDetalle.get_total_por_tipo
+            lista = level3BrasilDetalle.get_lista_tipo
+            total = level3BrasilDetalle.get_total
+            menu_level3(nombre, subtotal, lista, total)
             input("")
         elif opcionMenu == "5":
             print("")
-            menu_level3_colombia()
+            nombre = "COLOMBIA"
+            subtotal = level3ColombiaDetalle.get_total_por_descripcion
+            lista = level3ColombiaDetalle.get_lista_descripcion
+            total = level3ColombiaDetalle.get_total
+            menu_level3(nombre, subtotal, lista, total)
             input("")
         elif opcionMenu == "9":
             break
@@ -77,72 +93,19 @@ def menu_avoxi():
     print("El total es: " + str(avoxiDetalle.get_total(sheet_tabla_avoxi)))
     os.remove('avoxi.xlsx')
 
-def menu_level3_peru():
-    print("--- USTED ELEGIO LEVEL 3 - PERU ---")
+
+def menu_level3(nombre,subtotal,lista,total):
+    print("--- USTED ELEGIO LEVEL 3 - "+ nombre +" ---")
     print("EL ARCHIVO DEBE ESTAR EN FORMATO .XLSX\n")
     getPath = input("Inserta el path (Debe incluir el nombre del archivo) >> ")
     path = getPath.replace('"', '')
 
-
     # Se obtiene el excel - Detalle Level 3 Peru
-    excel_level3_peru = excelDetalle.open_excel(path)
+    excel_level3 = excelDetalle.open_excel(path)
     # Se obtiene la sheet de la tabla - Level 3 Peru
-    sheet_tabla_level3_peru = excelDetalle.open_sheet_default(excel_level3_peru)
+    sheet_tabla_level3 = excelDetalle.open_sheet_default(excel_level3)
 
     #Se obtiene la tabla por descripciones
-    level3PeruDetalle.get_total_por_descripcion(sheet_tabla_level3_peru, level3PeruDetalle.get_lista_descripcion(sheet_tabla_level3_peru))
+    subtotal(sheet_tabla_level3,lista(sheet_tabla_level3))
     #Se obtiene el total del consumo
-    print("El total es: " + str(level3PeruDetalle.get_total(sheet_tabla_level3_peru)))
-
-def menu_level3_argentina():
-    print("--- USTED ELEGIO LEVEL 3 - ARGENTINA ---")
-    print("EL ARCHIVO DEBE ESTAR EN FORMATO .XLSX\n")
-    getPath = input("Inserta el path (Debe incluir el nombre del archivo) >> ")
-    path = getPath.replace('"', '')
-
-
-    # Se obtiene el excel - Detalle Level 3 Peru
-    excel_level3_argentina = excelDetalle.open_excel(path)
-    # Se obtiene la sheet de la tabla - Level 3 Peru
-    sheet_tabla_level3_argentina = excelDetalle.open_sheet_default(excel_level3_argentina)
-
-    #Se obtiene la tabla por descripciones
-    level3ArgentinaDetalle.get_total_por_descripcion(sheet_tabla_level3_argentina, level3ArgentinaDetalle.get_lista_descripcion(sheet_tabla_level3_argentina))
-    #Se obtiene el total del consumo
-    print("El total es: " + str(level3ArgentinaDetalle.get_total(sheet_tabla_level3_argentina)))
-
-def menu_level3_brasil():
-    print("--- USTED ELEGIO LEVEL 3 - BRASIL ---")
-    print("EL ARCHIVO DEBE ESTAR EN FORMATO .XLSX\n")
-    getPath = input("Inserta el path (Debe incluir el nombre del archivo) >> ")
-    path = getPath.replace('"', '')
-
-
-    # Se obtiene el excel - Detalle Level 3 Peru
-    excel_level3_brasil = excelDetalle.open_excel(path)
-    # Se obtiene la sheet de la tabla - Level 3 Peru
-    sheet_tabla_level3_brasil = excelDetalle.open_sheet_default(excel_level3_brasil)
-
-    #Se obtiene la tabla por descripciones
-    level3BrasilDetalle.get_total_por_tipo(sheet_tabla_level3_brasil, level3BrasilDetalle.get_lista_tipo(sheet_tabla_level3_brasil))
-    #Se obtiene el total del consumo
-    print("El total es: " + str(level3BrasilDetalle.get_total(sheet_tabla_level3_brasil)))
-
-def menu_level3_colombia():
-    print("--- USTED ELEGIO LEVEL 3 - COLOMBIA ---")
-    print("EL ARCHIVO DEBE ESTAR EN FORMATO .XLSX\n")
-    getPath = input("Inserta el path (Debe incluir el nombre del archivo) >> ")
-    path = getPath.replace('"', '')
-
-
-    # Se obtiene el excel - Detalle Level 3 Peru
-    excel_level3_colombia = excelDetalle.open_excel(path)
-    # Se obtiene la sheet de la tabla - Level 3 Peru
-    sheet_tabla_level3_colombia = excelDetalle.open_sheet_default(excel_level3_colombia)
-
-    #Se obtiene la tabla por descripciones
-    level3ColombiaDetalle.get_total_por_descripcion(sheet_tabla_level3_colombia,level3ColombiaDetalle.get_lista_descripcion(sheet_tabla_level3_colombia))
-    #Se obtiene el total del consumo
-    print("El total es: " + str(level3ColombiaDetalle.get_total(sheet_tabla_level3_colombia)))
-
-
+    print("El total es: " + str(total(sheet_tabla_level3)))
