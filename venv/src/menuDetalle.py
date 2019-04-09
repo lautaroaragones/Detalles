@@ -129,12 +129,15 @@ def menu_embratel_brasil():
     embratelBrasilDetalle.convertir_MDB_a_Excel('0800',query,path0800)
     embratelBrasilDetalle.convertir_MDB_a_Excel('salientes', query, pathSalientes)
     
-    # Se obtiene el excel - Detalle Level 3 Peru
+    # Se obtiene el excel - Detalle Embratel 0800
     excel_0800 = excelDetalle.open_excel('0800.xlsx')
-    # Se obtiene la sheet de la tabla - Level 3 Peru
-    sheet_tabla_level3 = excelDetalle.open_sheet_default(excel_0800)
+    # Se obtiene la sheet de la tabla - Embratel 0800
+    sheet_tabla_0800 = excelDetalle.open_sheet_default(excel_0800)
 
-    # Se obtiene el excel - Detalle Level 3 Peru
+    # Se obtiene el excel - Detalle Embratel Salientes
     excel_salientes = excelDetalle.open_excel('salientes.xlsx')
-    # Se obtiene la sheet de la tabla - Level 3 Peru
-    sheet_tabla_level3 = excelDetalle.open_sheet_default(excel_salientes)
+    # Se obtiene la sheet de la tabla - Embratel Salientes
+    sheet_tabla_salientes = excelDetalle.open_sheet_default(excel_salientes)
+
+    print("El total de salientes es: " + str(embratelBrasilDetalle.get_total(sheet_tabla_salientes)))
+    print("El total de 0800 es: " + str(embratelBrasilDetalle.get_total(sheet_tabla_0800)))
