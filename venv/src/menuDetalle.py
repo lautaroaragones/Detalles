@@ -1,7 +1,7 @@
 import os
 import glob
 
-from detalle import avoxiDetalle , level3PeruDetalle, level3ArgentinaDetalle, level3BrasilDetalle, level3ColombiaDetalle
+from detalle import avoxiDetalle , level3PeruDetalle, level3ArgentinaDetalle, level3BrasilDetalle, level3ColombiaDetalle, embratelBrasilDetalle
 from excel import excelDetalle
 
 from pyexcel.cookbook import merge_all_to_a_book
@@ -20,6 +20,7 @@ def menu():
     print("\t3 - Level 3 - Argentina")
     print("\t4 - Level 3 - Brasil")
     print("\t5 - Level 3 - Colombia")
+    print("\t6 - Embratel - Brasil")
     print("\t9 - Salir")
 
 def option_menu():
@@ -66,6 +67,10 @@ def option_menu():
             total = level3ColombiaDetalle.get_total
             menu_level3(nombre, subtotal, lista, total)
             input("")
+        elif opcionMenu == "6":
+            print("")
+            menu_embratel_brasil()
+            input("")
         elif opcionMenu == "9":
             break
         else:
@@ -109,3 +114,27 @@ def menu_level3(nombre,subtotal,lista,total):
     subtotal(sheet_tabla_level3,lista(sheet_tabla_level3))
     #Se obtiene el total del consumo
     print("El total es: " + str(total(sheet_tabla_level3)))
+
+def menu_embratel_brasil():
+    print("--- USTED ELEGIO - EMBRATEL BRASIL ---")
+    print("EL ARCHIVO DEBE ESTAR EN FORMATO .MDB\n")
+    getPath = input("Inserta el path 0800 (Debe incluir el nombre del archivo) >> ")
+    path0800 = getPath.replace('"', '')
+
+    getPath = input("Inserta el path Salientes (Debe incluir el nombre del archivo) >> ")
+    pathSalientes = getPath.replace('"', '')
+
+    query = "SELECT * FROM chamadas"
+    
+    embratelBrasilDetalle.convertir_MDB_a_Excel('0800',query,path0800)
+    embratelBrasilDetalle.convertir_MDB_a_Excel('salientes', query, pathSalientes)
+    
+    # Se obtiene el excel - Detalle Level 3 Peru
+    excel_0800 = excelDetalle.open_excel('0800.xlsx')
+    # Se obtiene la sheet de la tabla - Level 3 Peru
+    sheet_tabla_level3 = excelDetalle.open_sheet_default(excel_0800)
+
+    # Se obtiene el excel - Detalle Level 3 Peru
+    excel_salientes = excelDetalle.open_excel('salientes.xlsx')
+    # Se obtiene la sheet de la tabla - Level 3 Peru
+    sheet_tabla_level3 = excelDetalle.open_sheet_default(excel_salientes)
