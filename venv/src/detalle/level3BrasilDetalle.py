@@ -53,6 +53,7 @@ def get_tipo_de_llamada_por_tipo(tipoLista):
         return "Local"
     elif(tipoLista == "USG"):
         return "Promedio"
+    return  tipoLista
 
 #Se obtiene el total por cada descripcion
 def get_total_por_tipo(sheet,lista):

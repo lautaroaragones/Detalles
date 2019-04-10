@@ -73,6 +73,7 @@ def get_tipo_de_llamada_por_descripcion(descripcionLista):
         return "Nacional"
     elif(descripcionLista == "Peru - Moviles Calls **RW"):
         return "Moviles"
+    return descripcionLista
 
 
 #Se valida si la descripcion esta repetida en la lista, si lo esta se suman los minutos y el costo al existente

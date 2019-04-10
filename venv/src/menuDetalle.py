@@ -1,7 +1,7 @@
 import os
 import glob
 
-from detalle import avoxiDetalle , level3PeruDetalle, level3ArgentinaDetalle, level3BrasilDetalle, level3ColombiaDetalle, embratelBrasilDetalle
+from detalle import avoxiDetalle , level3PeruDetalle, level3ArgentinaDetalle, level3BrasilDetalle, level3ColombiaDetalle,level3MexicoDetalle , embratelBrasilDetalle
 from excel import excelDetalle
 
 from pyexcel.cookbook import merge_all_to_a_book
@@ -20,7 +20,8 @@ def menu():
     print("\t3 - Level 3 - Argentina")
     print("\t4 - Level 3 - Brasil")
     print("\t5 - Level 3 - Colombia")
-    print("\t6 - Embratel - Brasil")
+    print("\t6 - Level 3 - Mexico")
+    print("\t7 - Embratel - Brasil")
     print("\t9 - Salir")
 
 def option_menu():
@@ -68,6 +69,14 @@ def option_menu():
             menu_level3(nombre, subtotal, lista, total)
             input("")
         elif opcionMenu == "6":
+            print("")
+            nombre = "MEXICO"
+            subtotal = level3MexicoDetalle.get_total_por_descripcion
+            lista = level3MexicoDetalle.get_lista_descripcion
+            total = level3MexicoDetalle.get_total
+            menu_level3(nombre, subtotal, lista, total)
+            input("")
+        elif opcionMenu == "7":
             print("")
             menu_embratel_brasil()
             input("")
@@ -138,6 +147,8 @@ def menu_embratel_brasil():
     excel_salientes = excelDetalle.open_excel('salientes.xlsx')
     # Se obtiene la sheet de la tabla - Embratel Salientes
     sheet_tabla_salientes = excelDetalle.open_sheet_default(excel_salientes)
+
+    embratelBrasilDetalle.get_total_por_descripcion(sheet_tabla_salientes,embratelBrasilDetalle.get_lista_descripcion(sheet_tabla_salientes))
 
     print("El total de salientes es: " + str(embratelBrasilDetalle.get_total(sheet_tabla_salientes)))
     print("El total de 0800 es: " + str(embratelBrasilDetalle.get_total(sheet_tabla_0800)))

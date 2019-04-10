@@ -6,15 +6,30 @@ from babel.numbers import format_currency
 def get_total(sheet):
     total= 0
     for row_index in range(2, (sheet.max_row + 1)):
-        costo = str(sheet.cell(row=row_index, column=14).value)
+        costo = str(sheet.cell(row=row_index, column=11).value)
         descripcion = sheet.cell(row=row_index, column=7).value
         tipo = sheet.cell(row=row_index, column=8).value
-        #Se verifica que la descripcion no sea el i800 Term: Colombia (Es una descripcion interna de level 3)
+        #Se verifica que la descripcion no sea el i800 Term (Es una descripcion interna de level 3)
         #Ademas de que no sea USG
-        if( descripcion != "i800 Term: COLOMBIA " and tipo != "USG"):
+        if( descripcion.find("i800 Term") == -1 and tipo != "USG"):
             #Se normalizan los numeros que empieza con . EJ .63
+            costo = add_0_on_point(costo)
             total = float(costo) + total
-    return format_currency(total, 'CO', locale='es_CO')
+    return format_currency(total, 'US', locale='en_US')
+
+
+# Se normalizan los numeros que empieza con . EJ .63
+def add_0_on_point(numero):
+    numero = str(numero)
+    if (numero[:1].find(".") != -1):
+        numeroConvertido = numero.replace(".", "0.")
+    else:
+        if(len(numero) == 4):
+            numero = list(numero)
+            numero[1] = "."
+            numero = "".join(numero)
+        numeroConvertido = numero
+    return numeroConvertido
 
 #Se obtiene una lista de descripciones
 def get_lista_descripcion(sheet):
@@ -37,10 +52,10 @@ def get_total_por_descripcion(sheet,lista):
         descripcionLista = lista[indice_lista]
         for row_index in range(2, (sheet.max_row + 1)):
             descripcion =sheet.cell(row=row_index, column=7).value
-            costo = sheet.cell(row=row_index, column=14).value
+            costo = add_0_on_point(sheet.cell(row=row_index, column=11).value)
             minutos = sheet.cell(row=row_index, column=10).value / 60
             if(descripcion == descripcionLista):
-                totalCosto = costo + totalCosto
+                totalCosto = float(costo) + totalCosto
                 totalMinutos = minutos + totalMinutos
         if(totalCosto != 0 and totalMinutos != 0):
             descripcionTelefonia = get_tipo_de_llamada_por_descripcion(descripcionLista)
@@ -53,11 +68,9 @@ def get_total_por_descripcion(sheet,lista):
 
 #Se estandarizan los tipos de llamadas
 def get_tipo_de_llamada_por_descripcion(descripcionLista):
-    if(descripcionLista == "i800 Term: COLOMBIA"):
+    if(descripcionLista.find("i800 Term") != -1):
         return "Non"
-    elif(descripcionLista == "Colombia - Abonado Ordinario"):
-        return "0800"
-    elif(descripcionLista == "Colombia - Abonado Movil"):
+    elif(descripcionLista.find("Mexico") != -1):
         return "0800"
     elif(descripcionLista == "International Calls **RW"):
         return "Non"
