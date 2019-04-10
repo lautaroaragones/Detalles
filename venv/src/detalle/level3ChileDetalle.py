@@ -14,7 +14,7 @@ def get_total(sheet):
         if( descripcion != "i800 Term: COLOMBIA " and tipo != "USG"):
             #Se normalizan los numeros que empieza con . EJ .63
             total = float(costo) + total
-    return format_currency(total, 'CO', locale='es_CO')
+    return format_currency(total, 'CL', locale='es_CL')
 
 #Se obtiene una lista de descripciones
 def get_lista_descripcion(sheet):
@@ -53,11 +53,9 @@ def get_total_por_descripcion(sheet,lista):
 
 #Se estandarizan los tipos de llamadas
 def get_tipo_de_llamada_por_descripcion(descripcionLista):
-    if(descripcionLista == "i800 Term: COLOMBIA"):
+    if(descripcionLista.find("i800 Term") != -1):
         return "Non"
-    elif(descripcionLista == "Colombia - Abonado Ordinario"):
-        return "0800"
-    elif(descripcionLista == "Colombia - Abonado Movil"):
+    elif(descripcionLista.find("Chile") != -1):
         return "0800"
     elif(descripcionLista == "International Calls **RW"):
         return "Non"
