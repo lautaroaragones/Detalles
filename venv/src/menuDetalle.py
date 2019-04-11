@@ -161,3 +161,6 @@ def menu_embratel_brasil():
 
     print("El total de salientes es: " + str(embratelBrasilDetalle.get_total(sheet_tabla_salientes)))
     print("El total de 0800 es: " + str(embratelBrasilDetalle.get_total(sheet_tabla_0800)))
+
+    os.remove('0800.xlsx')
+    os.remove('salientes.xlsx')

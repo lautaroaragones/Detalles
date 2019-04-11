@@ -11,7 +11,8 @@ def get_total(sheet):
             #Se normalizan los numeros que empieza con . EJ .63
             costoConvertido = add_0_on_point(costo)
             total = float(costoConvertido) + total
-    return total
+    #Se agrega el abono al final (120)
+    return total + 120
 
 
 # Se normalizan los numeros que empieza con . EJ .63
@@ -41,6 +42,8 @@ def get_total_por_descripcion(sheet,lista):
     totalCosto = 0
     totalMinutos = 0
     listaTotal = []
+    #Se agrega el abono Hardcodeado
+    listaTotal.append(["Abono", 1, 120])
     for indice_lista in range(0, (len(lista))):
         descripcionLista = lista[indice_lista]
         for row_index in range(2, (sheet.max_row + 1)):
