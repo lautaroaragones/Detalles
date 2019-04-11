@@ -1,7 +1,7 @@
 import os
 import glob
 
-from detalle import avoxiDetalle , level3PeruDetalle, level3ArgentinaDetalle, level3BrasilDetalle, level3ColombiaDetalle,level3MexicoDetalle,level3ChileDetalle , embratelBrasilDetalle
+from detalle import avoxiDetalle , level3PeruDetalle, level3ArgentinaDetalle, level3BrasilDetalle, level3ColombiaDetalle,level3MexicoDetalle,level3ChileDetalle , embratelBrasilDetalle, inteligBrasilDetalle
 from excel import excelDetalle
 
 from pyexcel.cookbook import merge_all_to_a_book
@@ -23,7 +23,8 @@ def menu():
     print("\t6 - Level 3 - Mexico")
     print("\t7 - Level 3 - Chile")
     print("\t8 - Embratel - Brasil")
-    print("\t9 - Salir")
+    print("\t9 - Intelig - Brasil")
+    print("\t0 - Salir")
 
 def option_menu():
     while True:
@@ -90,6 +91,10 @@ def option_menu():
             menu_embratel_brasil()
             input("")
         elif opcionMenu == "9":
+            print("")
+            menu_intellig_brasil()
+            input("")
+        elif opcionMenu == "0":
             break
         else:
             print("")
@@ -164,3 +169,20 @@ def menu_embratel_brasil():
 
     os.remove('0800.xlsx')
     os.remove('salientes.xlsx')
+
+def menu_intellig_brasil():
+    print("--- USTED ELEGIO - INTELLIG BRASIL ---")
+    print("EL ARCHIVO DEBE ESTAR EN FORMATO .XLSX\n")
+    getPath = input("Inserta el path (Debe incluir el nombre del archivo) >> ")
+    path = getPath.replace('"', '')
+
+    total_entrante = input("Inserta el TOTAL ENTRENTE de la factura >>")
+    total_saliente = input("Inserta el TOTAL SALIENTE de la factura >>")
+
+    # Se obtiene el excel - Detalle Intellig
+    excel = excelDetalle.open_excel(path)
+    # Se obtiene la sheet de la tabla - Intellig
+    sheet_tabla = excelDetalle.open_sheet_default(excel)
+
+    print(inteligBrasilDetalle.get_coeficiente_entrante(total_entrante,sheet_tabla))
+    print(inteligBrasilDetalle.get_coeficiente_saliente(total_saliente,sheet_tabla))
