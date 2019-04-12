@@ -177,6 +177,7 @@ def menu_intellig_brasil():
     path = getPath.replace('"', '')
 
     total_entrante = input("Inserta el TOTAL ENTRENTE de la factura >>")
+
     total_saliente = input("Inserta el TOTAL SALIENTE de la factura >>")
 
     # Se obtiene el excel - Detalle Intellig
@@ -184,5 +185,9 @@ def menu_intellig_brasil():
     # Se obtiene la sheet de la tabla - Intellig
     sheet_tabla = excelDetalle.open_sheet_default(excel)
 
-    print(inteligBrasilDetalle.get_coeficiente_entrante(total_entrante,sheet_tabla))
-    print(inteligBrasilDetalle.get_coeficiente_saliente(total_saliente,sheet_tabla))
+    coeficienteEntrante =inteligBrasilDetalle.get_coeficiente_entrante(total_entrante,sheet_tabla)
+    coeficienteSaliente = inteligBrasilDetalle.get_coeficiente_saliente(total_saliente,sheet_tabla)
+
+    inteligBrasilDetalle.get_total_por_descripcion(sheet_tabla,inteligBrasilDetalle.get_lista_descripcion(sheet_tabla),coeficienteEntrante,coeficienteSaliente)
+
+    print("El total es: " + inteligBrasilDetalle.get_total(sheet_tabla,coeficienteEntrante,coeficienteSaliente))
