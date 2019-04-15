@@ -176,9 +176,9 @@ def menu_intellig_brasil():
     getPath = input("Inserta el path (Debe incluir el nombre del archivo) >> ")
     path = getPath.replace('"', '')
 
-    total_entrante = input("Inserta el TOTAL ENTRENTE de la factura >>")
+    total_entrante = input("Inserta el TOTAL ENTRANTE de la factura (Numero entero, sin comas) >>")
 
-    total_saliente = input("Inserta el TOTAL SALIENTE de la factura >>")
+    total_saliente = input("Inserta el TOTAL SALIENTE de la factura (Numero entero, sin comas) >>")
 
     # Se obtiene el excel - Detalle Intellig
     excel = excelDetalle.open_excel(path)

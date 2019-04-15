@@ -11,11 +11,11 @@ def get_total(sheet,coeficienteEntrante,coeficienteSaliente):
         descripcion = sheet.cell(row=row_index, column=11).value
         grossAmount = sheet.cell(row=row_index, column=7).value / 100
         #Verifica que sea 0800 o no, porque el coeficiente varia
-        netAmount = get_net_amount(descripcion,coeficienteEntrante,coeficienteSaliente)
+        netAmount = get_net_amount(descripcion,coeficienteEntrante,coeficienteSaliente,grossAmount)
         totalCosto = float(netAmount) + totalCosto
     return format_currency(totalCosto, 'BR', locale='pt_BR')
 
-def get_net_amount(descripcion,coeficienteEntrante,coeficienteSaliente):
+def get_net_amount(descripcion,coeficienteEntrante,coeficienteSaliente,grossAmount):
     # Verifica que sea 0800 o no, porque el coeficiente varia
     if (descripcion == "Serviço de Rede"):
         return grossAmount * coeficienteEntrante
@@ -66,7 +66,7 @@ def get_total_por_descripcion(sheet,lista,coeficienteEntrante,coeficienteSalient
             descripcion =sheet.cell(row=row_index, column=11).value
             grossAmount = sheet.cell(row=row_index, column=7).value / 100
             # Verifica que sea 0800 o no, porque el coeficiente varia
-            netAmount = get_net_amount(descripcionLista, coeficienteEntrante, coeficienteSaliente)
+            netAmount = get_net_amount(descripcionLista, coeficienteEntrante, coeficienteSaliente,grossAmount)
             minutos = sheet.cell(row=row_index, column=8).value
             if(descripcion == descripcionLista):
                 totalCosto = float(netAmount) + totalCosto
@@ -101,6 +101,8 @@ def get_tipo_de_llamada_por_descripcion(descripcionLista):
         return "Movil"
     elif(descripcionLista == "Entre Estados p Fixo"):
         return "LDN"
+    elif(descripcionLista == "A Cobrar Local de Fixo"):
+        return "Local"
     return descripcionLista
 
 #Se valida si la descripcion esta repetida en la lista, si lo esta se suman los minutos y el costo al existente
