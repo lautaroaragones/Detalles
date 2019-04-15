@@ -1,7 +1,7 @@
 import os
 import glob
 
-from detalle import avoxiDetalle , level3PeruDetalle, level3ArgentinaDetalle, level3BrasilDetalle, level3ColombiaDetalle,level3MexicoDetalle,level3ChileDetalle , embratelBrasilDetalle, inteligBrasilDetalle
+from detalle import avoxiDetalle , level3PeruDetalle, level3ArgentinaDetalle, level3BrasilDetalle, level3ColombiaDetalle,level3MexicoDetalle,level3ChileDetalle , embratelBrasilDetalle, inteligBrasilDetalle,MCMMexicoDetalle
 from excel import excelDetalle
 
 from pyexcel.cookbook import merge_all_to_a_book
@@ -24,6 +24,7 @@ def menu():
     print("\t7 - Level 3 - Chile")
     print("\t8 - Embratel - Brasil")
     print("\t9 - Intelig - Brasil")
+    print("\t10 - MCM - Mexico")
     print("\t0 - Salir")
 
 def option_menu():
@@ -93,6 +94,10 @@ def option_menu():
         elif opcionMenu == "9":
             print("")
             menu_intellig_brasil()
+            input("")
+        elif opcionMenu == "10":
+            print("")
+            menu_MCM_mexico()
             input("")
         elif opcionMenu == "0":
             break
@@ -191,3 +196,16 @@ def menu_intellig_brasil():
     inteligBrasilDetalle.get_total_por_descripcion(sheet_tabla,inteligBrasilDetalle.get_lista_descripcion(sheet_tabla),coeficienteEntrante,coeficienteSaliente)
 
     print("El total es: " + inteligBrasilDetalle.get_total(sheet_tabla,coeficienteEntrante,coeficienteSaliente))
+
+def menu_MCM_mexico():
+    print("--- USTED ELEGIO - MCM MEXICO ---")
+    print("EL ARCHIVO DEBE ESTAR EN FORMATO .XLSX\n")
+    getPath = input("Inserta el path (Debe incluir el nombre del archivo) >> ")
+    path = getPath.replace('"', '')
+
+    # Se obtiene el excel - Detalle MCM
+    excel = excelDetalle.open_excel(path)
+    # Se obtiene la sheet de la tabla - MCM
+    sheet_tabla = excelDetalle.open_sheet_default(excel)
+
+    print(MCMMexicoDetalle.get_total(sheet_tabla))
