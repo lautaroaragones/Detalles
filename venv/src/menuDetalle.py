@@ -208,4 +208,6 @@ def menu_MCM_mexico():
     # Se obtiene la sheet de la tabla - MCM
     sheet_tabla = excelDetalle.open_sheet_default(excel)
 
-    print(MCMMexicoDetalle.get_total(sheet_tabla))
+    MCMMexicoDetalle.get_total_por_descripcion(sheet_tabla,MCMMexicoDetalle.get_lista_descripcion(sheet_tabla))
+
+    print("El total es: " + MCMMexicoDetalle.get_total(sheet_tabla))
