@@ -47,6 +47,8 @@ def get_total_por_descripcion(sheet,lista):
     totalMinutos = 0
     totalCostoMovil = 0
     totalMinutosMovil = 0
+    totalCostoI0800 = 0
+    totalMinutosI0800 = 0
     listaTotal = []
     """
     Inicia el ciclo por cada item de la lista
@@ -82,6 +84,16 @@ def get_total_por_descripcion(sheet,lista):
                     #Se suman a las variables globales de Movil
                     totalCostoMovil = totalCostoMovil + float(costoConvertido)
                     totalMinutosMovil = totalMinutosMovil + minutos
+                """
+                Se valida si en Internacional es un 0800 (Problema de los 690.. 0800 de USA)
+                """
+                if (validar_0800_int(float(minutos), float(costoConvertido), descripcion)):
+                    # Se resta del total el importe anteriormente sumado
+                    totalCosto = totalCosto - float(costoConvertido)
+                    totalMinutos = totalMinutos - minutos
+                    # Se suman a las variables globales de Movil
+                    totalCostoI0800 = totalCostoI0800 + float(costoConvertido)
+                    totalMinutosI0800 = totalMinutosI0800 + minutos
          #Se obtiene la descripcion personalizada EJ: 0800
         descripcionTelefonia = get_tipo_de_llamada_por_descripcion(descripcionLista)
         """
@@ -90,7 +102,12 @@ def get_total_por_descripcion(sheet,lista):
         if(validar_descripciones_repetidas(listaTotal,descripcionTelefonia,totalMinutos,totalCosto)):
             #Se utliza esta validacion para que no ingresen el movil como lista en 0 0
             if (totalCosto != 0 and totalMinutos != 0):
-             listaTotal.append([descripcionTelefonia, totalMinutos, totalCosto])
+                if(descripcionTelefonia != "0800"):
+                    listaTotal.append([descripcionTelefonia, totalMinutos, totalCosto])
+                else:
+                    #Se agregan los minutos del I800 (690... 0800 de USA)
+                    listaTotal.append([descripcionTelefonia, totalMinutos + totalMinutosI0800, totalCosto + totalCostoI0800])
+
         """
          Se valida si la descripcion es movil
          """
@@ -117,8 +134,6 @@ def get_tipo_de_llamada_por_descripcion(descripcionLista):
         return "0800"
     elif(descripcionLista == "National calls **RW"):
         return "Nacional"
-    elif(descripcionLista == "Peru - Moviles Calls **RW"):
-        return "Moviles"
     elif(descripcionLista == "Calls to toll free **RW"):
         return "Locales"
     return descripcionLista
@@ -142,5 +157,11 @@ def validar_moviles(totalMinutos,totalCosto, descripcion):
     if(totalCosto/totalMinutos > 0.8 and descripcion == "National calls **RW"):
         return True
     if(totalCosto/totalMinutos > 0.8 and descripcion == "Local Calls **RW"):
+        return True
+    return False
+
+#Se valida que el tipo de llamada es un 690... (Llamada 0800 de USA)
+def validar_0800_int(totalMinutos,totalCosto, descripcion):
+    if (totalCosto / totalMinutos < 1 and descripcion == "International Calls **RW"):
         return True
     return False

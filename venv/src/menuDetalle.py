@@ -106,6 +106,8 @@ def option_menu():
             input("No has pulsado ninguna opción correcta...\npulsa una tecla para continuar")
 
 def menu_avoxi():
+
+
     print("--- USTED ELEGIO AVOXI ---")
     print("EL ARCHIVO DEBE ESTAR EN FORMATO .CSV")
     print("Columnas a seleccionar cuando se baja el detalle: Fecha/Hora | Numero/ext/troncalSIP | Pais | Numero (DE) | Numero (A) | Duracion | Costo\n")
