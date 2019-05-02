@@ -25,6 +25,7 @@ def menu():
     print("\t8 - Embratel - Brasil")
     print("\t9 - Intelig - Brasil")
     print("\t10 - MCM - Mexico")
+    print("\t99 - Documentacion")
     print("\t0 - Salir")
 
 def option_menu():
@@ -99,11 +100,46 @@ def option_menu():
             print("")
             menu_MCM_mexico()
             input("")
+        elif opcionMenu == "99":
+            print("")
+            menu_documentacion()
+            input("")
         elif opcionMenu == "0":
             break
         else:
             print("")
             input("No has pulsado ninguna opción correcta...\npulsa una tecla para continuar")
+
+def menu_documentacion():
+    print("----------------------Avoxi----------------------")
+    print("1 - Convierte el .CSV en un archivo ACCESS y luego en un .XLSX")
+    print("""2 - Lo que se obtiene son los Call Charges (Consumo del mes) a eso hay que sumarle las sucripciones
+    (Abono), que viene en la factura""")
+    print("""3 - Se divide en una lista por paises, se agrega el costo y los minutos por cada uno, se descartan
+    las filas con costo 0 (Ya que pertenecen al abono)""")
+    print("----------------------Fin-Avoxi----------------------")
+    print('\n' * 1)
+    print("----------------------Level 3 - Peru----------------------")
+    print("1 - Se debe tener el archivo en libro excel (Originalmente viene en .CSV)")
+    print("2 - Se obtienen los datos mediante USG")
+    print("3 - Se harcodea el abono (120 Soles)")
+    print("""4 - Se suman los datos por tipo de llamada, en caso que aparezca una descripcion nueva se vera reflejado
+    en la tabla con el nombre de la descripcion real (EJ. Nationals Calls **RW)""")
+    print("----------------------Fin-Level 3 - Peru----------------------")
+    print('\n' * 1)
+    print("----------------------Level 3 - Argentina----------------------")
+    print("1 - Se debe tener el archivo en libro excel (Originalmente viene en .CSV)")
+    print("2 - Se obtienen los datos mediante USG")
+    print("""3 - Los moviles no vienen discriminados, se obtienen de las llamadas locales y nacionales (La cual se verificia
+    cada fila dividiendo costo/minutos). Si es de celulares, se suma a ese item dentro de la lisa y se resta el valor del
+    item de Nacional o Local""")
+    print("""4 - Se suman los datos por tipo de llamada, en caso que aparezca una descripcion nueva se vera reflejado
+    en la tabla con el nombre de la descripcion real (EJ. Nationals Calls **RW)""")
+    print("""5 - Los numeros I800 se validan si en internacional hay algun numero de estos, similar al algoritmo que se usa
+    con celulares. Enel caso de que lo sea, pasara a 0800 (Son las numeraciones que empiezan con 600...) y se descontara 
+    de internacional""")
+    print("----------------------Fin-Level 3 - Argentina----------------------")
+    print('\n' * 1)
 
 def menu_avoxi():
 
@@ -144,6 +180,11 @@ def menu_level3(nombre,subtotal,lista,total):
     subtotal(sheet_tabla_level3,lista(sheet_tabla_level3))
     #Se obtiene el total del consumo
     print("El total es: " + str(total(sheet_tabla_level3)))
+
+    confirm = input("Desea guardar en la BD la informacion ? Y/N: ")
+    if(confirm == "y" or confirm ==  "Y"):
+        print("GUARDAR EN BASE")
+
 
 def menu_embratel_brasil():
     print("--- USTED ELEGIO - EMBRATEL BRASIL ---")
@@ -213,3 +254,5 @@ def menu_MCM_mexico():
     MCMMexicoDetalle.get_total_por_descripcion(sheet_tabla,MCMMexicoDetalle.get_lista_descripcion(sheet_tabla))
 
     print("El total es: " + MCMMexicoDetalle.get_total(sheet_tabla))
+
+
