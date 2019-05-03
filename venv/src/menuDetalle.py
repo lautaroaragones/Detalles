@@ -1,7 +1,7 @@
 import os
 import glob
 
-from detalle import avoxiDetalle , level3PeruDetalle, level3ArgentinaDetalle, level3BrasilDetalle, level3ColombiaDetalle,level3MexicoDetalle,level3ChileDetalle , embratelBrasilDetalle, inteligBrasilDetalle,MCMMexicoDetalle
+from detalle import avoxiDetalle , level3PeruDetalle, level3ArgentinaDetalle, level3BrasilDetalle, level3ColombiaDetalle,level3MexicoDetalle,level3ChileDetalle , embratelBrasilDetalle, inteligBrasilDetalle,MCMMexicoDetalle,documentacion
 from excel import excelDetalle
 
 from pyexcel.cookbook import merge_all_to_a_book
@@ -111,35 +111,8 @@ def option_menu():
             input("No has pulsado ninguna opción correcta...\npulsa una tecla para continuar")
 
 def menu_documentacion():
-    print("----------------------Avoxi----------------------")
-    print("1 - Convierte el .CSV en un archivo ACCESS y luego en un .XLSX")
-    print("""2 - Lo que se obtiene son los Call Charges (Consumo del mes) a eso hay que sumarle las sucripciones
-    (Abono), que viene en la factura""")
-    print("""3 - Se divide en una lista por paises, se agrega el costo y los minutos por cada uno, se descartan
-    las filas con costo 0 (Ya que pertenecen al abono)""")
-    print("----------------------Fin-Avoxi----------------------")
-    print('\n' * 1)
-    print("----------------------Level 3 - Peru----------------------")
-    print("1 - Se debe tener el archivo en libro excel (Originalmente viene en .CSV)")
-    print("2 - Se obtienen los datos mediante USG")
-    print("3 - Se harcodea el abono (120 Soles)")
-    print("""4 - Se suman los datos por tipo de llamada, en caso que aparezca una descripcion nueva se vera reflejado
-    en la tabla con el nombre de la descripcion real (EJ. Nationals Calls **RW)""")
-    print("----------------------Fin-Level 3 - Peru----------------------")
-    print('\n' * 1)
-    print("----------------------Level 3 - Argentina----------------------")
-    print("1 - Se debe tener el archivo en libro excel (Originalmente viene en .CSV)")
-    print("2 - Se obtienen los datos mediante USG")
-    print("""3 - Los moviles no vienen discriminados, se obtienen de las llamadas locales y nacionales (La cual se verificia
-    cada fila dividiendo costo/minutos). Si es de celulares, se suma a ese item dentro de la lisa y se resta el valor del
-    item de Nacional o Local""")
-    print("""4 - Se suman los datos por tipo de llamada, en caso que aparezca una descripcion nueva se vera reflejado
-    en la tabla con el nombre de la descripcion real (EJ. Nationals Calls **RW)""")
-    print("""5 - Los numeros I800 se validan si en internacional hay algun numero de estos, similar al algoritmo que se usa
-    con celulares. Enel caso de que lo sea, pasara a 0800 (Son las numeraciones que empiezan con 600...) y se descontara 
-    de internacional""")
-    print("----------------------Fin-Level 3 - Argentina----------------------")
-    print('\n' * 1)
+    os.system('cls')
+    documentacion.get_documentacion()
 
 def menu_avoxi():
 

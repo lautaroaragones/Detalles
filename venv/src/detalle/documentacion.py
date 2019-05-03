@@ -1,0 +1,82 @@
+def get_documentacion():
+    print("----------------------Avoxi----------------------")
+    print("ACTUALIZADO 03/05/2019")
+    print("1 - Convierte un archivo ACCESS a un .XLSX")
+    print("""2 - Lo que se obtiene son los Call Charges (Consumo del mes) a eso hay que sumarle las sucripciones
+     (Abono), que viene en la factura""")
+    print("""3 - Se divide en una lista por paises, se agrega el costo y los minutos por cada uno, se descartan
+     las filas con costo 0 (Ya que pertenecen al abono)""")
+    print("----------------------Fin-Avoxi----------------------")
+    print('\n' * 1)
+    print("----------------------Level 3 - Peru----------------------")
+    print("ACTUALIZADO 03/05/2019")
+    print("1 - Se debe tener el archivo en libro excel (Originalmente viene en .CSV)")
+    print("2 - Se obtienen los datos mediante USG")
+    print("3 - Se harcodea el abono (120 Soles)")
+    print("""4 - Se suman los datos por descripcion de llamada, en caso que aparezca una descripcion nueva se vera reflejado
+     en la tabla con el nombre de la descripcion real (EJ. Nationals Calls **RW)""")
+    print("----------------------Fin-Level 3 - Peru----------------------")
+    print('\n' * 1)
+    print("----------------------Level 3 - Argentina----------------------")
+    print("ACTUALIZADO 03/05/2019")
+    print("1 - Se debe tener el archivo en libro excel (Originalmente viene en .CSV)")
+    print("2 - Se obtienen los datos mediante USG")
+    print("""3 - Los moviles no vienen discriminados, se obtienen de las llamadas locales y nacionales (La cual se verificia
+     cada fila dividiendo costo/minutos). Si es de celulares, se suma a ese item dentro de la lisa y se resta el valor del
+     item de Nacional o Local""")
+    print("""4 - Se suman los datos por descripcion de llamada, en caso que aparezca una descripcion nueva se vera reflejado
+     en la tabla con el nombre de la descripcion real (EJ. Nationals Calls **RW)""")
+    print("""5 - Los numeros I800 se validan si en internacional hay algun numero de estos, similar al algoritmo que se usa
+     con celulares. Enel caso de que lo sea, pasara a 0800 (Son las numeraciones que empiezan con 600...) y se descontara 
+     de internacional""")
+    print("----------------------Fin-Level 3 - Argentina----------------------")
+    print('\n' * 1)
+    print("----------------------Level 3 - Brasil----------------------")
+    print("ACTUALIZADO 03/05/2019")
+    print("1 - Se debe tener el archivo en libro excel (Originalmente viene en .CSV)")
+    print("2 - Se toman los datos mediante los tipos de llamada (EJ. I). Se omite el USG")
+    print("3 - Q y Y son 0800, RC abono, R local")
+    print("""4 - Se suman los datos por tipo de llamada, en caso que aparezca una descripcion nueva se vera reflejado
+     en la tabla con el nombre de la descripcion real (EJ. Q""")
+    print("----------------------Fin-Level 3 - Brasil----------------------")
+    print('\n' * 1)
+    print("----------------------Level 3 - Colombia----------------------")
+    print("ACTUALIZADO 03/05/2019")
+    print("1 - Se debe tener el archivo en libro excel (Originalmente viene en .CSV)")
+    print("2 - Se obtienen los datos por la descripcion de llamada omitiendo los USG y descripcion I800 TERM")
+    print("""3 - Se suman los datos por tipo de llamada, en caso que aparezca una descripcion nueva se vera reflejado
+         en la tabla con el nombre de la descripcion real (EJ. Q""")
+    print("----------------------Fin-Level 3 - Colombia----------------------")
+    print('\n' * 1)
+    print("----------------------Level 3 - Mexico----------------------")
+    print("ACTUALIZADO 03/05/2019")
+    print("1 - Se debe tener el archivo en libro excel (Originalmente viene en .CSV)")
+    print("2 - Se obtienen los datos por la descripcion de llamada omitiendo los USG y descripcion I800 TERM")
+    print("""3 - Se suman los datos por tipo de llamada, en caso que aparezca una descripcion nueva se vera reflejado
+         en la tabla con el nombre de la descripcion real (EJ. Q""")
+    print("----------------------Fin-Level 3 - Mexico----------------------")
+    print('\n' * 1)
+    print("----------------------Level 3 - Chile----------------------")
+    print("ACTUALIZADO 03/05/2019")
+    print("1 - Se debe tener el archivo en libro excel (Originalmente viene en .CSV)")
+    print("2 - Se obtienen los datos por la descripcion de llamada omitiendo los USG y descripcion I800 TERM")
+    print("""3 - Se suman los datos por tipo de llamada, en caso que aparezca una descripcion nueva se vera reflejado
+         en la tabla con el nombre de la descripcion real (EJ. Q""")
+    print("----------------------Fin-Level 3 - Chile----------------------")
+    print('\n' * 1)
+    print("----------------------Embratel - Brasil----------------------")
+    print("ACTUALIZADO 03/05/2019")
+    print("1 - Convierte un archivo Access a un .XLSX")
+    print("2 - Obtiene dos archivos, el de salientes y el 0800. El 0800 solo se utiliza para saber el total ")
+    print("""3 - Se suman los datos por tipo de llamada, en caso que aparezca una descripcion nueva se vera reflejado
+         en la tabla con el nombre de la descripcion real (EJ. CHAMADA LDI FIXO-FIXO""")
+    print("----------------------Fin-Embratel - Brasil----------------------")
+    print('\n' * 1)
+    print("----------------------MCM - Mexico----------------------")
+    print("ACTUALIZADO 03/05/2019")
+    print("1 - Convierte un archivo Access a un .XLSX")
+    print("2 - Se obtienen los datos por la descripcion de la llamada ")
+    print("""3 - Se suman los datos por tipo de llamada, en caso que aparezca una descripcion nueva se vera reflejado
+         en la tabla con el nombre de la descripcion real (EJ. LDN-CEL""")
+    print("----------------------Fin-MCM - Mexico----------------------")
+    print('\n' * 1)
