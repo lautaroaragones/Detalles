@@ -12,6 +12,7 @@ def menu():
     """
     Función que limpia la pantalla y muestra nuevamente el menu
     """
+    #"Prueba"
     print('\n' * 1)
     os.system('cls')  # NOTA para windows tienes que cambiar clear por cls
     print("Selecciona una opción")
