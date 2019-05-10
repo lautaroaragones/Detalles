@@ -1,6 +1,8 @@
 from tabulate import tabulate
 
 from babel.numbers import format_currency
+from bd import bdDetalle
+from entities import config_manager
 
 #Obtiene el total de consumo por cada pais
 def get_total(sheet):
@@ -49,7 +51,14 @@ def get_total_por_descripcion(sheet,lista):
                  listaTotal.append([descripcionTelefonia, totalMinutos, totalCosto])
         totalCosto = 0
         totalMinutos = 0
+
     print(tabulate(listaTotal, headers=['Descripcion', 'Minutos' , 'Costo'], tablefmt='fancy_grid'))
+
+    #Se obtiene el total del consumo
+    print("El total es: " + str(get_total(sheet)))
+
+    #Se ingresan la inforamacion en la BD
+    bdDetalle.getInformationBD(listaTotal, "COP", "Colombia", "CenturyLink")
 
 #Se estandarizan los tipos de llamadas
 def get_tipo_de_llamada_por_descripcion(descripcionLista):

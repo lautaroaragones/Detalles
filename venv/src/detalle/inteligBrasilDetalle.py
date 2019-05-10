@@ -2,6 +2,8 @@ from datetime import time
 from tabulate import tabulate
 from babel.numbers import format_currency
 
+from bd import bdDetalle
+
 
 #Obtiene el total de consumo
 def get_total(sheet,coeficienteEntrante,coeficienteSaliente):
@@ -80,6 +82,12 @@ def get_total_por_descripcion(sheet,lista,coeficienteEntrante,coeficienteSalient
         totalMinutos = 0
     print(tabulate(listaTotal, headers=['Descripcion', 'Minutos' , 'Costo'], tablefmt='fancy_grid'))
 
+    #Se obtiene el total del consumo
+    print("El total es: " + str(get_total(sheet,coeficienteEntrante,coeficienteSaliente)))
+
+    #Se ingresan la inforamacion en la BD
+    bdDetalle.getInformationBD(listaTotal, "BRL", "Brasil", "Intelig")
+
 
 #Se estandarizan los tipos de llamadas
 def get_tipo_de_llamada_por_descripcion(descripcionLista):
@@ -88,19 +96,19 @@ def get_tipo_de_llamada_por_descripcion(descripcionLista):
     elif(descripcionLista == "Local p/ Fixo"):
         return "Local"
     elif(descripcionLista == "A Cobrar Local de Móvel"):
-        return "Movil"
+        return "Celulares"
     elif(descripcionLista == "Dentro do Estado p Fixo"):
         return "Local"
     elif(descripcionLista == "Dentro do Estado p Móvel"):
-        return "Movil"
+        return "Celulares"
     elif(descripcionLista == "Entre Estados p Móvel"):
-        return "Movil"
+        return "Celulares"
     elif(descripcionLista == "Local p/ Móvel"):
-        return "Movil"
+        return "Celulares"
     elif(descripcionLista == "Local p/ Móvel - Especial"):
-        return "Movil"
+        return "Celulares"
     elif(descripcionLista == "Entre Estados p Fixo"):
-        return "LDN"
+        return "Larga Distancia Nacional"
     elif(descripcionLista == "A Cobrar Local de Fixo"):
         return "Local"
     return descripcionLista

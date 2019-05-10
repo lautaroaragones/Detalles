@@ -2,6 +2,8 @@ from tabulate import tabulate
 
 from babel.numbers import format_currency
 
+from bd import bdDetalle
+
 #Obtiene el total de consumo por cada pais
 def get_total(sheet):
     total= 0
@@ -24,7 +26,8 @@ def add_0_on_point(numero):
     if (numero[:1].find(".") != -1):
         numeroConvertido = numero.replace(".", "0.")
     else:
-        if(len(numero) == 4):
+        #Se agrega el punto a los numeros que son 1.000 pero vienen como 1000 y sin 1,0
+        if(len(numero) == 4 and numero.find(".") == -1):
             numero = list(numero)
             numero[1] = "."
             numero = "".join(numero)
@@ -65,6 +68,12 @@ def get_total_por_descripcion(sheet,lista):
         totalCosto = 0
         totalMinutos = 0
     print(tabulate(listaTotal, headers=['Descripcion', 'Minutos' , 'Costo'], tablefmt='fancy_grid'))
+
+    # Se obtiene el total del consumo
+    print("El total es: " + str(get_total(sheet)))
+
+    # Se ingresan la inforamacion en la BD
+    bdDetalle.getInformationBD(listaTotal, "USD", "Mexico", "CenturyLink")
 
 #Se estandarizan los tipos de llamadas
 def get_tipo_de_llamada_por_descripcion(descripcionLista):

@@ -1,4 +1,5 @@
 from tabulate import tabulate
+from bd import bdDetalle
 
 #Obtiene el total de consumo por cada pais
 def get_total(sheet):
@@ -62,20 +63,27 @@ def get_total_por_descripcion(sheet,lista):
         totalMinutos = 0
     print(tabulate(listaTotal, headers=['Descripcion', 'Minutos' , 'Costo'], tablefmt='fancy_grid'))
 
+    # Se obtiene el total del consumo
+    print("El total es: " + str(get_total(sheet)))
+
+    # Se ingresan la inforamacion en la BD
+    bdDetalle.getInformationBD(listaTotal, "PEN", "Peru", "CenturyLink")
+
+
 #Se estandarizan los tipos de llamadas
 def get_tipo_de_llamada_por_descripcion(descripcionLista):
     if(descripcionLista == "0800 National Incoming calls **RW"):
         return "0800"
     elif(descripcionLista == "International Calls **RW"):
-        return "Internacional"
+        return "Larga Distancia Internacional"
     elif(descripcionLista == "Local Calls **RW"):
-        return "Locales"
+        return "Local"
     elif(descripcionLista == "Local Incoming Calls to 0800 **RW"):
         return "0800"
     elif(descripcionLista == "National calls **RW"):
-        return "Nacional"
+        return "Larga Distancia Nacional"
     elif(descripcionLista == "Peru - Moviles Calls **RW"):
-        return "Moviles"
+        return "Celulares"
     return descripcionLista
 
 

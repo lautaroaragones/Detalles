@@ -151,12 +151,6 @@ def menu_level3(nombre,subtotal,lista,total):
 
     #Se obtiene la tabla por descripciones
     subtotal(sheet_tabla_level3,lista(sheet_tabla_level3))
-    #Se obtiene el total del consumo
-    print("El total es: " + str(total(sheet_tabla_level3)))
-
-    confirm = input("Desea guardar en la BD la informacion ? Y/N: ")
-    if(confirm == "y" or confirm ==  "Y"):
-        print("GUARDAR EN BASE")
 
 
 def menu_embratel_brasil():
@@ -183,10 +177,7 @@ def menu_embratel_brasil():
     # Se obtiene la sheet de la tabla - Embratel Salientes
     sheet_tabla_salientes = excelDetalle.open_sheet_default(excel_salientes)
 
-    embratelBrasilDetalle.get_total_por_descripcion(sheet_tabla_salientes,embratelBrasilDetalle.get_lista_descripcion(sheet_tabla_salientes))
-
-    print("El total de salientes es: " + str(embratelBrasilDetalle.get_total(sheet_tabla_salientes)))
-    print("El total de 0800 es: " + str(embratelBrasilDetalle.get_total(sheet_tabla_0800)))
+    embratelBrasilDetalle.get_total_por_descripcion(sheet_tabla_0800,sheet_tabla_salientes,embratelBrasilDetalle.get_lista_descripcion(sheet_tabla_salientes))
 
     os.remove('0800.xlsx')
     os.remove('salientes.xlsx')
@@ -211,7 +202,6 @@ def menu_intellig_brasil():
 
     inteligBrasilDetalle.get_total_por_descripcion(sheet_tabla,inteligBrasilDetalle.get_lista_descripcion(sheet_tabla),coeficienteEntrante,coeficienteSaliente)
 
-    print("El total es: " + inteligBrasilDetalle.get_total(sheet_tabla,coeficienteEntrante,coeficienteSaliente))
 
 def menu_MCM_mexico():
     print("--- USTED ELEGIO - MCM MEXICO ---")
@@ -226,6 +216,5 @@ def menu_MCM_mexico():
 
     MCMMexicoDetalle.get_total_por_descripcion(sheet_tabla,MCMMexicoDetalle.get_lista_descripcion(sheet_tabla))
 
-    print("El total es: " + MCMMexicoDetalle.get_total(sheet_tabla))
 
 

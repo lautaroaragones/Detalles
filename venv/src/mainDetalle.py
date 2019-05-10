@@ -3,7 +3,7 @@
 
 import menuDetalle
 
-
+no_choice = "Variable"
 
 menuDetalle.option_menu()
 

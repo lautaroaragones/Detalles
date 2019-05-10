@@ -3,6 +3,7 @@ from pandas import DataFrame, ExcelWriter
 import pandas
 from tabulate import tabulate
 from babel.numbers import format_currency
+from bd import bdDetalle
 
 #Se convierte el Archvio MDB (Access) en un archivo de libro excel
 def convertir_MDB_a_Excel(nombreExcel,query,path):
@@ -56,7 +57,7 @@ def get_lista_descripcion(sheet):
     return list
 
 #Se obtiene el total por cada descripcion
-def get_total_por_descripcion(sheet,lista):
+def get_total_por_descripcion(sheet_tabla_0800,sheet,lista):
     totalCosto = 0
     totalMinutos = 0
     listaTotal = []
@@ -77,35 +78,41 @@ def get_total_por_descripcion(sheet,lista):
         totalMinutos = 0
     print(tabulate(listaTotal, headers=['Descripcion', 'Minutos' , 'Costo'], tablefmt='fancy_grid'))
 
+    print("El total de salientes es: " + str(get_total(sheet))+ " (El 0800 del cuadro es solo de salientes)")
+    print("El total de 0800 es: " + str(get_total(sheet_tabla_0800)))
+
+    #Se ingresan la inforamacion en la BD
+    bdDetalle.getInformationBD(listaTotal, "BRL", "Brasil", "Embratel")
+
 #Se estandarizan los tipos de llamadas
 def get_tipo_de_llamada_por_descripcion(descripcionLista):
     if(descripcionLista.find("CHAMADA LDI FIXO-FIXO") != -1):
-        return "Internacional"
+        return "Larga Distancia Internacional"
     elif(descripcionLista.find("CHAMADA LDI FIXO-MOVEL") != -1):
-        return "Movil"
+        return "Celulares"
     elif(descripcionLista.find("CHAMADA LDN OFFNET FIXO-FIXO") != -1):
-        return "LDN"
+        return "Larga Distancia Nacional"
     elif(descripcionLista.find("CHAMADA LDN OFFNET FIXO-MOVEL") != -1):
-        return "Movil"
+        return "Celulares"
     elif(descripcionLista.find("CHAMADA LDN PARA") != -1):
-        return "0800 (Salientes)"
+        return "0800"
     elif(descripcionLista.find("CHAMADA LOCAL FIXO-FIXO") != -1):
         return "Local"
     elif(descripcionLista.find("CHAMADA LOCAL FIXO-MOVEL") != -1):
-        return "Movil"
+        return "Celulares"
     elif(descripcionLista.find("CHAMADA LOCAL PARA") != -1):
-        return "0800 (Salientes)"
+        return "0800"
     elif(descripcionLista.find("DDD") != -1):
         if(descripcionLista.find("DDD PARA TELEFONE FIXO") != -1):
-            return "LDN"
+            return "Larga Distancia Nacional"
         elif(descripcionLista.find("DDD PARA TELEFONE MOVEL") != -1):
-            return "Movil"
+            return "Celulares"
         else:
-            return "LDN"
+            return "Larga Distancia Nacional"
     elif(descripcionLista.find("DDI") != -1):
-        return "Internacional"
+        return "Larga Distancia Internacional"
     elif(descripcionLista.find("SERVICO 0300") != -1):
-        return "0800 (Salientes)"
+        return "0800"
     return descripcionLista
 
 

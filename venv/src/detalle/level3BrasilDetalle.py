@@ -1,4 +1,6 @@
 from tabulate import tabulate
+from bd import bdDetalle
+
 
 #Obtiene el total de consumo por cada pais
 def get_total(sheet):
@@ -83,6 +85,12 @@ def get_total_por_tipo(sheet,lista):
                 totalCosto = 0
                 totalMinutos = 0
     print(tabulate(listaTotal, headers=['Descripcion', 'Minutos' , 'Costo'], tablefmt='fancy_grid'))
+
+    # Se obtiene el total del consumo
+    print("El total es: " + str(get_total(sheet)))
+
+    # Se ingresan la inforamacion en la BD
+    bdDetalle.getInformationBD(listaTotal, "BRL", "Brasil", "CenturyLink")
 
 #Se valida si la descripcion esta repetida en la lista, si lo esta se suman los minutos y el costo al existente
 def validar_tipos_repetidos(listaTotal,descripcionTelefonia,totalMinutos,totalCosto):

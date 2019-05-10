@@ -1,4 +1,6 @@
 from tabulate import tabulate
+from bd import bdDetalle
+
 
 #Obtiene el total de consumo por cada pais
 def get_total(sheet):
@@ -36,6 +38,12 @@ def get_total_por_pais(sheet,lista):
         totalCosto = 0
         totalMinutos = 0
     print(tabulate(listaTotal, headers=['Pais','Minutos','Costo'], tablefmt='fancy_grid'))
+
+    #Se obtiene el total del consumo
+    print("El total es: " + str(get_total(sheet)))
+
+    #Se ingresan la inforamacion en la BD
+    bdDetalle.getInformationBD(listaTotal, "USD", "Multi Pais", "Avoxi")
 
 def convert_horas_en_minutos(horas):
     return horas/60

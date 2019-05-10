@@ -1,5 +1,6 @@
 from tabulate import tabulate
 from babel.numbers import format_currency
+from bd import bdDetalle
 
 #Obtiene el total de consumo
 def get_total(sheet):
@@ -43,6 +44,13 @@ def get_total_por_descripcion(sheet,lista):
         totalMinutos = 0
     print(tabulate(listaTotal, headers=['Descripcion', 'Minutos' , 'Costo'], tablefmt='fancy_grid'))
 
+    #Se obtiene el total del consumo
+    print("El total es: " + str(get_total(sheet)))
+
+    #Se ingresan la inforamacion en la BD
+    bdDetalle.getInformationBD(listaTotal, "MXN", "Mexico", "MCM")
+
+
 #Se estandarizan los tipos de llamadas
 def get_tipo_de_llamada_por_descripcion(descripcionLista):
     if(descripcionLista.find("Local") != -1):
@@ -50,13 +58,13 @@ def get_tipo_de_llamada_por_descripcion(descripcionLista):
     elif(descripcionLista.find("800-LD") != -1):
         return "0800"
     elif(descripcionLista == "Celular"):
-        return "Movil"
+        return "Celulares"
     elif(descripcionLista == "LD Internacional"):
-        return "Internacional"
+        return "Larga Distancia Internacional"
     elif(descripcionLista == "LD Nacional"):
-        return "LDN"
+        return "Larga Distancia Nacional"
     elif(descripcionLista == "LDN-CEL"):
-        return "Movil"
+        return "Celulares"
     return descripcionLista
 
 
