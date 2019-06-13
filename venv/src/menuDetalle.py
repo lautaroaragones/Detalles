@@ -12,7 +12,6 @@ def menu():
     """
     Función que limpia la pantalla y muestra nuevamente el menu
     """
-    #"Prueba"
     print('\n' * 1)
     os.system('cls')  # NOTA para windows tienes que cambiar clear por cls
     print("Selecciona una opción")
@@ -29,6 +28,50 @@ def menu():
     print("\t99 - Documentacion")
     print("\t0 - Salir")
 
+def menu_option_level3_arg():
+    print('\n' * 1)
+    os.system('cls')  # NOTA para windows tienes que cambiar clear por cls
+    print("Selecciona una opción")
+    print("\t1 - Hasta Mayo 2019")
+    print("\t2 - Actual")
+
+
+def menu_option_level3_peru():
+    print('\n' * 1)
+    os.system('cls')  # NOTA para windows tienes que cambiar clear por cls
+    print("Selecciona una opción")
+    print("\t1 - Hasta Mayo 2019")
+    print("\t2 - Actual")
+    print("\t0 - Salir")
+
+def option_menu_level3_peru():
+    while True:
+        # Mostramos el menu
+        menu_option_level3_peru()
+
+        # solicituamos una opción al usuario
+        opcionMenu = input("Inserta un numero valor >> ")
+
+        if opcionMenu == "1":
+            print("")
+            #Funciona hasta Mayo 2019
+            nombre = "PERU"
+            subtotal = level3PeruDetalle.get_total_por_descripcion
+            lista = level3PeruDetalle.get_lista_descripcion
+            total = level3PeruDetalle.get_total
+            menu_level3(nombre, subtotal, lista, total)
+            input()
+        elif opcionMenu == "2":
+            #Es el que funciona en el actual
+            nombre = "PERU - Detail Report"
+            subtotal = level3PeruDetalle.get_total_por_descripcion_USG
+            lista = level3PeruDetalle.get_lista_descripcion_USG
+            total = level3PeruDetalle.get_total_USG
+            menu_level3(nombre, subtotal, lista, total)
+            input()
+        elif opcionMenu == "0":
+            break
+
 def option_menu():
     while True:
         # Mostramos el menu
@@ -42,12 +85,7 @@ def option_menu():
             menu_avoxi()
             input()
         elif opcionMenu == "2":
-            print("")
-            nombre = "PERU"
-            subtotal = level3PeruDetalle.get_total_por_descripcion
-            lista = level3PeruDetalle.get_lista_descripcion
-            total = level3PeruDetalle.get_total
-            menu_level3(nombre, subtotal, lista, total)
+            option_menu_level3_peru()
             input()
         elif opcionMenu == "3":
             print("")
@@ -134,8 +172,6 @@ def menu_avoxi():
 
     # Se obtiene la tabla por paises
     avoxiDetalle.get_total_por_pais(sheet_tabla_avoxi,avoxiDetalle.get_lista_paises(sheet_tabla_avoxi))
-    # Se obtiene el total del consumo
-    print("El total es: " + str(avoxiDetalle.get_total(sheet_tabla_avoxi)))
     os.remove('avoxi.xlsx')
 
 
@@ -153,6 +189,21 @@ def menu_level3(nombre,subtotal,lista,total):
     #Se obtiene la tabla por descripciones
     subtotal(sheet_tabla_level3,lista(sheet_tabla_level3))
 
+def menu_level3_test(nombre):
+    print("--- USTED ELEGIO LEVEL 3 - "+ nombre +" ---")
+    print("EL ARCHIVO DEBE ESTAR EN FORMATO .XLSX\n")
+    getPath = input("Inserta el path (Debe incluir el nombre del archivo) >> ")
+    path = getPath.replace('"', '')
+
+    # Se obtiene el excel - Detalle Level 3 Peru
+    excel_level3 = excelDetalle.open_excel(path)
+    # Se obtiene la sheet de la tabla - Level 3 Peru
+    sheet_tabla_level3 = excelDetalle.open_sheet_default(excel_level3)
+
+    print(level3PeruDetalle.get_total_USG(sheet_tabla_level3))
+    print(level3PeruDetalle.get_lista_descripcion_USG(sheet_tabla_level3))
+
+    level3PeruDetalle.get_total_por_descripcion_USG(sheet_tabla_level3, level3PeruDetalle.get_lista_descripcion_USG(sheet_tabla_level3))
 
 def menu_embratel_brasil():
     print("--- USTED ELEGIO - EMBRATEL BRASIL ---")
