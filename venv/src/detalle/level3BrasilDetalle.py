@@ -52,7 +52,9 @@ def get_tipo_de_llamada_por_tipo(tipoLista):
     elif(tipoLista == "RC"):
         return "Abono"
     elif(tipoLista == "R"):
-        return "Local"
+        return "0800"
+    elif(tipoLista == "Z"):
+        return "0800"
     elif(tipoLista == "USG"):
         return "Promedio"
     return  tipoLista
@@ -74,16 +76,18 @@ def get_total_por_tipo(sheet,lista):
                         minutos = sheet.cell(row=row_index, column=10).value / 60
                         costo = float(tarifaConvertido) * minutos
                         totalCosto = float(costo) + totalCosto
-                        totalMinutos = minutos + totalMinutos
+                        totalMinutos = int(minutos) + totalMinutos
                     elif(tipo == "RC"):
                         totalMinutos = 0
                         totalCosto = float(sheet.cell(row=row_index, column=11).value)
                 descripcionTelefonia = get_tipo_de_llamada_por_tipo(tipoLista)
                 if(validar_tipos_repetidos(listaTotal,descripcionTelefonia,totalMinutos,totalCosto)):
                     if(descripcionTelefonia != "Promedio"):
-                        listaTotal.append([descripcionTelefonia, totalMinutos, totalCosto])
+                        listaTotal.append([descripcionTelefonia, int(totalMinutos), totalCosto])
                 totalCosto = 0
                 totalMinutos = 0
+    #Se valida si el SIP existe en la lista
+    validar_SIP(listaTotal)
     print(tabulate(listaTotal, headers=['Descripcion', 'Minutos' , 'Costo'], tablefmt='fancy_grid'))
 
     # Se obtiene el total del consumo
@@ -102,3 +106,12 @@ def validar_tipos_repetidos(listaTotal,descripcionTelefonia,totalMinutos,totalCo
             listaTotal[indice_lista_total][2] = listaTotal[indice_lista_total][2] + totalCosto
             return False
     return True
+
+#se valida si el SIP esta en el excel, si no se agrega (En el nuevo excel despues de mayo 2019 no aparece)
+def validar_SIP(listaTotal):
+    validacion = False
+    for indice_lista_total in range(0, (len(listaTotal))):
+        if (listaTotal[indice_lista_total][0] == "Abono"):
+            validacion = True
+    if(validacion == False):
+        listaTotal.append(["Abono", 1, 1070.24])
