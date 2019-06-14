@@ -9,26 +9,34 @@ def get_documentacion():
     print("----------------------Fin-Avoxi----------------------")
     print('\n' * 1)
     print("----------------------Level 3 - Peru----------------------")
-    print("ACTUALIZADO 03/05/2019")
+    print("ACTUALIZADO 14/06/2019")
+    print("---VERSION ANTERIOR A MAYO 2019----")
     print("1 - Se debe tener el archivo en libro excel (Originalmente viene en .CSV)")
     print("2 - Se obtienen los datos mediante USG")
     print("3 - Se harcodea el abono (120 Soles)")
     print("""4 - Se suman los datos por descripcion de llamada, en caso que aparezca una descripcion nueva se vera reflejado
      en la tabla con el nombre de la descripcion real (EJ. Nationals Calls **RW)""")
+    print("---VERSION POSTERIOR A JUNIO 2019----")
+    print("""1 - Se debe bajar el excel de DetailReport""")
+    print("""2 - Se normaliza la tabla, especificando cada item con un item normalizado""")
     print("----------------------Fin-Level 3 - Peru----------------------")
     print('\n' * 1)
     print("----------------------Level 3 - Argentina----------------------")
-    print("ACTUALIZADO 03/05/2019")
+    print("ACTUALIZADO 14/06/2019")
+    print("---VERSION ANTERIOR A MAYO 2019----")
     print("1 - Se debe tener el archivo en libro excel (Originalmente viene en .CSV)")
     print("2 - Se obtienen los datos mediante USG")
     print("""3 - Los moviles no vienen discriminados, se obtienen de las llamadas locales y nacionales (La cual se verificia
-     cada fila dividiendo costo/minutos). Si es de celulares, se suma a ese item dentro de la lisa y se resta el valor del
+     cada fila dividiendo costo/minutos). Si es de celulares, se suma a ese item dentro de la lista y se resta el valor del
      item de Nacional o Local""")
     print("""4 - Se suman los datos por descripcion de llamada, en caso que aparezca una descripcion nueva se vera reflejado
      en la tabla con el nombre de la descripcion real (EJ. Nationals Calls **RW)""")
     print("""5 - Los numeros I800 se validan si en internacional hay algun numero de estos, similar al algoritmo que se usa
      con celulares. Enel caso de que lo sea, pasara a 0800 (Son las numeraciones que empiezan con 600...) y se descontara 
      de internacional""")
+    print("---VERSION POSTERIOR A JUNIO 2019----")
+    print("""1 - Se debe bajar el excel de DetailReport""")
+    print("""2 - Se normaliza la tabla, especificando cada item con un item normalizado""")
     print("----------------------Fin-Level 3 - Argentina----------------------")
     print('\n' * 1)
     print("----------------------Level 3 - Brasil----------------------")

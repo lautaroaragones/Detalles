@@ -1,7 +1,7 @@
 from tabulate import tabulate
 from bd import bdDetalle
 
-#Obtiene el total de consumo por cada pais
+#Obtiene el total de consumo por cada pais OLD
 def get_total(sheet):
     total= 0
     for row_index in range(2, (sheet.max_row + 1)):
@@ -20,11 +20,10 @@ def get_total_USG(sheet):
     for row_index in range(2, (sheet.max_row + 1)):
         total_palabra = str(sheet.cell(row=row_index, column=3).value)
 
-        #Se verifica que el tipo sea USG
+        #Se busca la palabra total
         if( total_palabra == "Total"):
             total_costo = sheet.cell(row=row_index, column=8).value
             return total_costo
-    #Se agrega el abono al final (120)
     return 0
 
 
@@ -37,7 +36,7 @@ def add_0_on_point(numero):
         numeroConvertido = numero
     return numeroConvertido
 
-#Se obtiene una lista de descripciones
+#Se obtiene una lista de descripciones OLD
 def get_lista_descripcion(sheet):
     list = []
     for row_index in range(2, (sheet.max_row + 1)):
@@ -61,7 +60,7 @@ def get_lista_descripcion_USG(sheet):
             list.append(descripcion)
     return list
 
-#Se obtiene el total por cada descripcion
+#Se obtiene el total por cada descripcion OLD
 def get_total_por_descripcion(sheet,lista):
     totalCosto = 0
     totalMinutos = 0
@@ -111,8 +110,11 @@ def get_total_por_descripcion_USG(sheet,lista):
                     if(minutos == None):
                         minutos = 0
                     totalMinutos = float(minutos) + totalMinutos
+        descripcionTelefonia = get_tipo_de_llamada_por_descripcion(descripcionLista)
+        # Si es abono, se le pone 1 a los minutos para que lo resgistre en la lista
+        if (descripcionTelefonia == "Abono"):
+            totalMinutos = 1
         if(totalCosto != 0 and totalMinutos != 0):
-            descripcionTelefonia = get_tipo_de_llamada_por_descripcion(descripcionLista)
             if(validar_descripciones_repetidas(listaTotal,descripcionTelefonia,totalMinutos,totalCosto)):
                 listaTotal.append([descripcionTelefonia, totalMinutos, totalCosto])
         totalCosto = 0

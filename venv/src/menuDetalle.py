@@ -35,6 +35,34 @@ def menu_option_level3_arg():
     print("\t1 - Hasta Mayo 2019")
     print("\t2 - Actual")
 
+def option_menu_level3_arg():
+    while True:
+        # Mostramos el menu
+        menu_option_level3_arg()
+
+        # solicituamos una opción al usuario
+        opcionMenu = input("Inserta un numero valor >> ")
+
+        if opcionMenu == "1":
+            print("")
+            #Funciona hasta Mayo 2019
+            nombre = "ARGENTINA"
+            subtotal = level3ArgentinaDetalle.get_total_por_descripcion
+            lista = level3ArgentinaDetalle.get_lista_descripcion
+            total = level3ArgentinaDetalle.get_total
+            menu_level3(nombre, subtotal, lista, total)
+            input()
+        elif opcionMenu == "2":
+            #Es el que funciona en el actual
+            nombre = "ARGENTINA - Detail Report"
+            subtotal = level3ArgentinaDetalle.get_total_por_descripcion_USG
+            lista = level3ArgentinaDetalle.get_lista_descripcion_USG
+            total = level3ArgentinaDetalle.get_total_USG
+            menu_level3(nombre, subtotal, lista, total)
+            input()
+        elif opcionMenu == "0":
+            break
+
 
 def menu_option_level3_peru():
     print('\n' * 1)
@@ -88,13 +116,8 @@ def option_menu():
             option_menu_level3_peru()
             input()
         elif opcionMenu == "3":
-            print("")
-            nombre = "ARGENTINA"
-            subtotal = level3ArgentinaDetalle.get_total_por_descripcion
-            lista = level3ArgentinaDetalle.get_lista_descripcion
-            total = level3ArgentinaDetalle.get_total
-            menu_level3(nombre, subtotal, lista, total)
-            input("")
+            option_menu_level3_arg()
+            input()
         elif opcionMenu == "4":
             print("")
             nombre = "BRASIL"
@@ -188,22 +211,6 @@ def menu_level3(nombre,subtotal,lista,total):
 
     #Se obtiene la tabla por descripciones
     subtotal(sheet_tabla_level3,lista(sheet_tabla_level3))
-
-def menu_level3_test(nombre):
-    print("--- USTED ELEGIO LEVEL 3 - "+ nombre +" ---")
-    print("EL ARCHIVO DEBE ESTAR EN FORMATO .XLSX\n")
-    getPath = input("Inserta el path (Debe incluir el nombre del archivo) >> ")
-    path = getPath.replace('"', '')
-
-    # Se obtiene el excel - Detalle Level 3 Peru
-    excel_level3 = excelDetalle.open_excel(path)
-    # Se obtiene la sheet de la tabla - Level 3 Peru
-    sheet_tabla_level3 = excelDetalle.open_sheet_default(excel_level3)
-
-    print(level3PeruDetalle.get_total_USG(sheet_tabla_level3))
-    print(level3PeruDetalle.get_lista_descripcion_USG(sheet_tabla_level3))
-
-    level3PeruDetalle.get_total_por_descripcion_USG(sheet_tabla_level3, level3PeruDetalle.get_lista_descripcion_USG(sheet_tabla_level3))
 
 def menu_embratel_brasil():
     print("--- USTED ELEGIO - EMBRATEL BRASIL ---")
