@@ -46,4 +46,6 @@ def get_total_por_pais(sheet,lista):
     bdDetalle.getInformationBD(listaTotal, "USD", "Multi Pais", "Avoxi")
 
 def convert_horas_en_minutos(horas):
+    if(horas == None):
+        return 0
     return horas/60
