@@ -5,5 +5,7 @@ import menuDetalle
 
 no_choice = "Variable"
 
+
+#prueba
 menuDetalle.option_menu()
 
